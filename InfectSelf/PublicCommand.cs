@@ -1,4 +1,5 @@
 ﻿using PulsarModLoader.Chat.Commands.CommandRouter;
+using PulsarModLoader.Utilities;
 
 namespace InfectSelf
 {
@@ -16,7 +17,14 @@ namespace InfectSelf
 
         public override void Execute(string arguments, int SenderID)
         {
-            Mod.InfectSelf();
+            if (Mod.Enabled)
+            {
+                Mod.InfectSelf();
+            }
+            else
+            {
+                Messaging.Notification("This command has been disabled by the host", PLServer.Instance.GetPlayerFromPlayerID(SenderID));
+            }
         }
     }
 }
